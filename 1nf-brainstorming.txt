@@ -1,0 +1,3 @@
+-- Started by downloading the USDA Food Environment Atlas dataset from https://data.world/adamhelsinger/food-environment-atlas & then reviewed the data. As I review, need to start making a list of tables (representing each object/entity, not ideas/concepts) for my database. Then make a column list for each table, including datatype for each column. Try to include all data from the dataset in my data model. Lastly, notate relatioships between tables (one-to-one, one-to-many, many-to-many). Then create a draft on DB Designer and create a final version, export PDF when finished.
+
+TABLES:
