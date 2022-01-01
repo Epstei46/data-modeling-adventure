@@ -1,6 +1,9 @@
 Working on this exercise at https://ed.devmountain.com/materials/data-bp-1/exercises/data-modeling-adventure/
 
 (1) Define normalization in your own words. Be sure to include why normalization is important.
-
+--  Normalization is when we take unorganized data and sort it into entities (tables) with relationships, which can help eliminate redundancies and anomalies that could arise from inserting/updating/deleting. This organization allows the setup/enforcement of rules for each attribute/column, like a set data type that must be matched when inserting, having default values instead of null values, simply not allowing null values, etc. As a result, data is cleaner and more readable.
 
 (2) What is the difference between 1NF, 2NF, and 3NF?
+--  1NF is the simplest form of normalization. It requires the data to have a specific shape, organized into tables with rows and columns. Column values must be of the same data type, each row should have a primary key, and there should not be any repeating groups (attributes should contain single values, no lists/arrays or nested tables).
+--  2NF is the next step after 1NF. The primary key must describe the entire entity, so any attributes that do not depend on the primary-key attribute belong in a different entity. For example, if manager information is listed in the hotel table for a corporation, managers can change (not dependent on the hotel) so that should be broken out into an Employee table with a Foreign Key that references the business.
+--  3NF is the next step after 2NF. Must not be any transitive dependencies (attribute with multiple dependencies). For example, address depends on the hotel, but city/state/country/postal code depend on the street address, so remove them and create a new entity/table for Address. Then in the Hotel table, add a foreign key that references our new Address ID from the newly created table.
