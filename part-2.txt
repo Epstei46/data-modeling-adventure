@@ -50,9 +50,7 @@ population_estimate, integer
 -----------------------------------------------------------------------------------------------
 
 TABLE: supplemental_data_state (51 rows)
-id, integer, Primary Key
-state, varchar(2), Foreign Key references counties_states
-state, varchar(30)
+state, varchar(30), Primary Key
 state_population_2008, integer
 state_population_2009, integer
 state_population_2010, integer
@@ -89,8 +87,8 @@ summer_food_participants_fy_2014, integer
 CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
 
 TABLE: supplemental_data_state (51 rows)
-state, varchar(2)
-state_name, varchar(30)
+id, integer, Primary Key
+state, varchar(2), Foreign Key references counties_states
 year, integer
 state_population, integer
 wic_participants, integer
