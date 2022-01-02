@@ -4,7 +4,7 @@
 --  Most of the 'assistance' table.
 
 (2) Provide an example of what granularity would look like in the USDA database.
---  
+--  USDA database as is, is at a very high level of granularity. It shows calculated results per county. For example, the local table has the sum/count for vegetable farms and vegetable acres. If we had access to more of the data, we could drill down and look at the acreage for each vegetable farm.
 
 
 (3) Evaluate your data model in terms of normalization. Does your data model fulfill the first normal form? What about the second normal form? What about the third normal form?
