@@ -1,7 +1,7 @@
 -- Started by downloading the USDA Food Environment Atlas dataset from https://data.world/adamhelsinger/food-environment-atlas & then reviewed the data. As I review, need to start making a list of tables (representing each object/entity, not ideas/concepts) for my database. Then make a column list for each table, including datatype for each column. Try to include all data from the dataset in my data model. Lastly, notate relationships between tables (one-to-one, one-to-many, many-to-many). Then create a draft on DB Designer and create a final version, export PDF when finished.
 
 TABLES:
-counties_states; supplemental_data_county; supplemental_data_state; access; assistance; health; insecurity; local; prices_taxes; restaurants; stores; socioeconomic.
+counties_states; supplemental_data_county; supplemental_data_state; access; assistance; health & physical activity; insecurity; local; prices_taxes; restaurants; stores; socioeconomic.
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
@@ -87,7 +87,7 @@ summer_food_participants_fy_2014, integer
 CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
 
 TABLE: supplemental_data_state (51 rows)
-id, integer, Primary Key
+id, integer, Primary Key, auto increment
 state, varchar(2), Foreign Key references counties_states
 year, integer
 state_population, integer
@@ -114,6 +114,23 @@ laccess_seniors10 (Seniors, low access to store, 2010), decimal
 pct_laccess_seniors10 (Seniors, low access to store (%), 2010), decimal
 laccess_hhnv10 (Households, no car & low access to store, 2010), decimal
 pct_laccess_hhnv10 (Households, no car & low access to store (%), 2010), decimal
+
+CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
+
+TABLE: access (3256 rows, 3144 non-empty, 112 partially empty)
+id, integer, Primary Key, auto increment
+fips_code, integer, Foreign Key references counties_states
+year, integer
+laccess_pop, decimal
+pct_laccess_pop, decimal
+laccess_lowi, decimal
+pct_laccess_lowi, decimal
+laccess_child, decimal
+pct_laccess_child, decimal
+laccess_seniors, decimal
+pct_laccess_seniors, decimal
+laccess_hhnv, decimal
+pct_laccess_hhnv, decimal
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
@@ -176,6 +193,16 @@ pct_cacfp14 [Child & Adult] (Child & Adult Care (% pop), 2009*), decimal
 pch_cacfp_09_14 [Child & Adult] (Child & Adult Care (change % pop), 2009-14*), decimal
 fdpir12 [FDPIR] (FDPIR Sites, 2012), integer
 
+CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
+
+TABLE: assistance (3143 rows, some empty values & some columns with 100% same value)
+fips_code, integer, Primary Key, Foreign Key references counties_states
+redemp_snaps08
+redemp_snaps12
+....
+Kept everything after 'redemp_snaps08' the same. If I included a 'year' column, there would be too many empty values throughout the table. Does not make sense to break everything into smaller tables to include a 'year' row because each attribute/column depends on the fips_code, not the year (which is not useful for organization due to the 'year' range and only having values for some years, not all).
+
+
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
 
@@ -200,6 +227,21 @@ recfacpth12 [Physical Activity] (Recreation & fitness facilities/1,000 pop, 2012
 pch_recfacpth_07_12 [Physical Activity] (Recreation & fitness facilities/1,000 pop (% change), 2007-12), decimal (129 empty)
 natamen [Physical Activity] (ERS natural amenity index, 1999), integer (1-7, 35 empty)
 
+CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
+
+TABLE: health (3143 rows)
+fips_code, integer, Primary Key, Foreign Key references counties_states
+pct_diabetes_adults09 [Health] (Adult diabetes rate, 2009), decimal (5 empty)
+.... Same inbetween as above
+pch_obese_child_08_11 [Health] (Low-income preschool obesity rate (% change), 2006-08 to 2009-11), decimal (507 empty)
+
+TABLE: Physical Activity
+fips_code, integer, Primary Key, Foreign Key references counties_states
+pct_hspa09 [Physical Activity] (High schoolers physically active (%), 2009*), decimal (640 empty)
+recfac07 [Physical Activity] (Recreation & fitness facilities, 2007), decimal (5 empty)
+.... Same inbetween as above
+natamen [Physical Activity] (ERS natural amenity index, 1999), integer (1-7, 35 empty)
+
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
 
@@ -220,6 +262,14 @@ ch_vlfoodsec_09_12 (Household very low food security (change %),2007-09 to 2010-
 foodinsec_child_01_07 (Child food insecurity (% households, multiple-year average), 2001-07*), decimal
 foodinsec_child_03_11 (Child food insecurity (% households, multiple-year average), 2003-11*), decimal
 
+CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
+
+TABLE: insecurity (3256 rows, 3144 non-empty, 112 partially empty )
+fips_code, integer, Primary Key, Foreign Key references counties_states
+foodinsec_00_02 (Household food insecurity (%, three-year average), 2000-02*), decimal
+....
+Kept everything after 'foodinsec_00_02' the same.
+
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
 
@@ -239,13 +289,13 @@ fmrktpth09 [Farmers' Markets] (Farmers' markets/1,000 pop, 2009), decimal (118 e
 fmrktpth13 [Farmers' Markets] (Farmers' markets/1,000 pop, 2013), decimal (117 empty)
 pch_fmrktpth_09_13 [Farmers' Markets] (Farmers' markets/1,000 pop (% change), 2009-13), decimal (600 empty)
 fmrkt_snap13 [Farmers' Markets] (Farmers' markets that report accepting SNAP, 2013), integer (1074 empty)
-pct_fmrkt_snap13 [Farmers' Markets] (Farmers' markets that report accepting SNAP (%), 2013), integer (1074 empty)
+pct_fmrkt_snap13 [Farmers' Markets] (Farmers' markets that report accepting SNAP (%), 2013), decimal (1074 empty)
 fmrkt_wic13 [Farmers' Markets] (Farmers' markets that report accepting WIC, 2013), integer (1074 empty)
-pct_fmrkt_wic13 [Farmers' Markets] (Farmers' markets that report accepting WIC (%), 2013), integer (1074 empty)
+pct_fmrkt_wic13 [Farmers' Markets] (Farmers' markets that report accepting WIC (%), 2013), decimal (1074 empty)
 fmrkt_wiccash13 [Farmers' Markets] (Farmers' markets that report accepting WIC Cash, 2013), integer (1074 empty)
 pct_fmrkt_wiccash13 [Farmers' Markets] (Farmers' markets that report accepting WIC Cash (%), 2013), decimal (1074 empty)
 fmrkt_sfmnp13 [Farmers' Markets] (Farmers' markets that report accepting SFMNP, 2013), integer (1074 empty)
-pct_fmrkt_sfmnp13 [Farmers' Markets] (Farmers' markets that report accepting SFMNP (%), 2013), integer (1074 empty)
+pct_fmrkt_sfmnp13 [Farmers' Markets] (Farmers' markets that report accepting SFMNP (%), 2013), decimal (1074 empty)
 fmrkt_frveg13 [Farmers' Markets] (Farmers' markets that report selling fruit & vegetables, 2013), integer (1074 empty)
 pct_frmkt_frveg13 [Farmers' Markets] (Farmers' markets that report selling fruit & vegetables (%), 2013), decimal (1074 empty)
 fmrkt_anmlprod13 [Farmers' Markets] (Farmers' markets that report selling animal products, 2013), integer (1074 empty)
@@ -274,6 +324,14 @@ agritrsm_ops07 [Other Local Food Entities] (Agritourism operations), integer (11
 agritrsm_rct07 [Other Local Food Entities] (Agritourism receipts), integer (1734 empty)
 farm_to_school [Other Local Food Entities] (Farm to school program, 2009), bool (113 empty)
 
+CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
+
+TABLE: local (3255 rows, 113+ partially empty rows)
+fips_code, integer, Primary Key, Foreign Key references counties_states
+dirsales_farms07 [Direct Sales] (Farms with direct sales, 2007), decimal (177 empty)
+....
+Kept everything after 'dirsales_farms07' the same.
+
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
 
@@ -289,6 +347,14 @@ sodatax_vendm11 [Sales Tax] (Soda sales tax, vending, 2011*), decimal (112 empty
 chipstax_stores11 [Sales Tax] (Chip & pretzel sales tax, retail stores, 2011*), decimal (112 empty)
 chipstax_vendm11 [Sales Tax] (Chip & pretzel sales tax, vending, 2011*), decimal (112 empty)
 food_tax11 [Sales Tax] (General food sales tax, retail stores, 2011*), decimal (112 empty)
+
+CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
+
+TABLE: prices_taxes (3256 rows, 112+ partially empty rows)
+fips_code, integer, Primary Key, Foreign Key references counties_states
+milk_price10 [Prices] (Price of low-fat milk/national average, 2010**), decimal (146 empty)
+....
+Kept everything after 'milk_price10' the same.
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
@@ -314,6 +380,14 @@ pc_ffrsales07 [Expenditures] (Expenditures per capita, fast food, 2007*), decima
 pc_fsrsales02 [Expenditures] (Expenditures per capita, restaurants, 2002*), integer (16 empty)
 pc_fsrsales07 [Expenditures] (Expenditures per capita, restaurants, 2007*), decimal
 
+CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
+
+TABLE: restaurants (3143 rows)
+fips_code, integer, Primary Key, Foreign Key references counties_states
+ffr07 [Fast-food] (Fast-food restaurants, 2007), integer (5 empty)
+....
+Kept everything after 'ffr07' the same.
+
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
 
@@ -336,6 +410,30 @@ childpovrate10 (Child poverty rate, 2010), varchar(10) (all decimals though)
 perchldpov10 (Persistent-child-poverty counties, 2010), bool
 metro13 (Metro/nonmetro counties, 2010), bool
 poploss00 (Population-loss counties, 2000), varchar(10) (but all 0 or 1, except for 6 <Null> values)
+
+CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
+
+TABLE: socioeconomic (3143 rows)
+id, integer, Primary Key, auto increment
+fips_code, integer, Primary Key, Foreign Key references counties_states
+year, integer
+pct_nhwhite (% White, 2010), decimal
+pct_nhblack (% Black, 2010), decimal
+pct_hisp (% Hispanic, 2010), decimal
+pct_nhasian (% Asian, 2010), decimal
+pct_nhna (% American Indian or Alaska Native, 2010), decimal
+pct_nhpi (% Hawaiian or Pacific Islander, 2010), decimal
+pct_65older (% Population 65 years or older, 2010), decimal
+pct_18younger (% Population under age 18, 2010), decimal
+medhhinc (Median household income, 2010), INTEGER
+povrate (Poverty rate, 2010), DECIMAL
+perpov (Persistent-poverty counties, 2010), bool
+childpovrate (Child poverty rate, 2010), DECIMAL
+perchldpov (Persistent-child-poverty counties, 2010), bool
+metro (Metro/nonmetro counties, 2010), bool
+
+OMITTED:
+poploss00 (Population-loss counties, 2000), varchar(10) (but all 0 or 1, except for 6 <Null> values) OMITTED BECAUSE unrelated to rest of the data, different year, and meaningless values.
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
@@ -368,6 +466,7 @@ pch_specs_07_12 [Specialized] (Specialized food stores (% change), 2007-12), dec
 specspth07 [Specialized] (Specialized food stores/1,000 pop, 2007), decimal (78 empty)
 specspth12 [Specialized] (Specialized food stores/1,000 pop, 2012), decimal (78 empty)
 pch_specspth_07_12 [Specialized] (Specialized food stores/1,000 pop (% change), 2007-12), decimal (247 empty)
+
 snaps08 [SNAP-authorized] (SNAP-authorized stores, 2008), decimal (78 empty)
 snaps12 [SNAP-authorized] (SNAP-authorized stores, 2012), decimal (78 empty)
 pch_snaps_08_12 [SNAP-authorized] (SNAP-authorized stores (% change), 2008-12), decimal (83 empty)
@@ -380,6 +479,14 @@ pch_wics_08_12 [WIC-authorized] (WIC-authorized stores (% change), 2008-12), dec
 wicspth08 [WIC-authorized] (WIC-authorized stores/1,000 pop, 2008), decimal (78 empty)
 wicspth12 [WIC-authorized] (WIC-authorized stores/1,000 pop, 2012), decimal (78 empty)
 pch_wicspth_08_12 [WIC-authorized] (WIC-authorized stores/1,000 pop (% change), 2008-12), decimal (97 empty)
+
+CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
+
+TABLE: stores (3221 rows, 78+ partially empty)
+fips_code, integer, Primary Key, Foreign Key references counties_states
+groc07 [Grocery] (Grocery stores, 2007), integer (78 empty)
+....
+Kept everything after 'groc07' the same.
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
