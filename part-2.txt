@@ -42,7 +42,7 @@ CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHA
 
 TABLE: supplemental_data_county (3143 rows)
 id, integer, Primary Key
-fips_code, integer, Foreign Key references counties_states
+fips_code, integer, Foreign Key references counties_states (one-to-many relationship)
 year, integer
 population_estimate, integer
 
@@ -88,7 +88,7 @@ CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHA
 
 TABLE: supplemental_data_state (51 rows)
 id, integer, Primary Key, auto increment
-state, varchar(2), Foreign Key references counties_states
+state, varchar(2), Foreign Key references counties_states (one-to-many relationship)
 year, integer
 state_population, integer
 wic_participants, integer
@@ -119,7 +119,7 @@ CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHA
 
 TABLE: access (3256 rows, 3144 non-empty, 112 partially empty)
 id, integer, Primary Key, auto increment
-fips_code, integer, Foreign Key references counties_states
+fips_code, integer, Foreign Key references counties_states (one-to-many relationship)
 year, integer
 laccess_pop, decimal
 pct_laccess_pop, decimal
@@ -196,7 +196,7 @@ fdpir12 [FDPIR] (FDPIR Sites, 2012), integer
 CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
 
 TABLE: assistance (3143 rows, some empty values & some columns with 100% same value)
-fips_code, integer, Primary Key, Foreign Key references counties_states
+fips_code, integer, Primary Key, Foreign Key references counties_states (one-to-one relationship)
 redemp_snaps08
 redemp_snaps12
 ....
@@ -230,13 +230,13 @@ natamen [Physical Activity] (ERS natural amenity index, 1999), integer (1-7, 35 
 CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
 
 TABLE: health (3143 rows)
-fips_code, integer, Primary Key, Foreign Key references counties_states
+fips_code, integer, Primary Key, Foreign Key references counties_states (one-to-one relationship)
 pct_diabetes_adults09 [Health] (Adult diabetes rate, 2009), decimal (5 empty)
 .... Same inbetween as above
 pch_obese_child_08_11 [Health] (Low-income preschool obesity rate (% change), 2006-08 to 2009-11), decimal (507 empty)
 
 TABLE: Physical Activity
-fips_code, integer, Primary Key, Foreign Key references counties_states
+fips_code, integer, Primary Key, Foreign Key references counties_states (one-to-one relationship)
 pct_hspa09 [Physical Activity] (High schoolers physically active (%), 2009*), decimal (640 empty)
 recfac07 [Physical Activity] (Recreation & fitness facilities, 2007), decimal (5 empty)
 .... Same inbetween as above
@@ -265,7 +265,7 @@ foodinsec_child_03_11 (Child food insecurity (% households, multiple-year averag
 CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
 
 TABLE: insecurity (3256 rows, 3144 non-empty, 112 partially empty )
-fips_code, integer, Primary Key, Foreign Key references counties_states
+fips_code, integer, Primary Key, Foreign Key references counties_states (one-to-one relationship)
 foodinsec_00_02 (Household food insecurity (%, three-year average), 2000-02*), decimal
 ....
 Kept everything after 'foodinsec_00_02' the same.
@@ -327,7 +327,7 @@ farm_to_school [Other Local Food Entities] (Farm to school program, 2009), bool 
 CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
 
 TABLE: local (3255 rows, 113+ partially empty rows)
-fips_code, integer, Primary Key, Foreign Key references counties_states
+fips_code, integer, Primary Key, Foreign Key references counties_states (one-to-one relationship)
 dirsales_farms07 [Direct Sales] (Farms with direct sales, 2007), decimal (177 empty)
 ....
 Kept everything after 'dirsales_farms07' the same.
@@ -351,7 +351,7 @@ food_tax11 [Sales Tax] (General food sales tax, retail stores, 2011*), decimal (
 CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
 
 TABLE: prices_taxes (3256 rows, 112+ partially empty rows)
-fips_code, integer, Primary Key, Foreign Key references counties_states
+fips_code, integer, Primary Key, Foreign Key references counties_states (one-to-one relationship)
 milk_price10 [Prices] (Price of low-fat milk/national average, 2010**), decimal (146 empty)
 ....
 Kept everything after 'milk_price10' the same.
@@ -383,7 +383,7 @@ pc_fsrsales07 [Expenditures] (Expenditures per capita, restaurants, 2007*), deci
 CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
 
 TABLE: restaurants (3143 rows)
-fips_code, integer, Primary Key, Foreign Key references counties_states
+fips_code, integer, Primary Key, Foreign Key references counties_states (one-to-one relationship)
 ffr07 [Fast-food] (Fast-food restaurants, 2007), integer (5 empty)
 ....
 Kept everything after 'ffr07' the same.
@@ -415,7 +415,7 @@ CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHA
 
 TABLE: socioeconomic (3143 rows)
 id, integer, Primary Key, auto increment
-fips_code, integer, Primary Key, Foreign Key references counties_states
+fips_code, integer, Primary Key, Foreign Key references counties_states (one-to-one relationship currently, but would become one-to-many if data was added for another year)
 year, integer
 pct_nhwhite (% White, 2010), decimal
 pct_nhblack (% Black, 2010), decimal
@@ -483,7 +483,7 @@ pch_wicspth_08_12 [WIC-authorized] (WIC-authorized stores/1,000 pop (% change), 
 CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
 
 TABLE: stores (3221 rows, 78+ partially empty)
-fips_code, integer, Primary Key, Foreign Key references counties_states
+fips_code, integer, Primary Key, Foreign Key references counties_states (one-to-one relationship)
 groc07 [Grocery] (Grocery stores, 2007), integer (78 empty)
 ....
 Kept everything after 'groc07' the same.
