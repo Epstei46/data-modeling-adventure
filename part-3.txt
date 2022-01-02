@@ -8,4 +8,6 @@
 
 
 (3) Evaluate your data model in terms of normalization. Does your data model fulfill the first normal form? What about the second normal form? What about the third normal form?
---  
+--  My data model fulfills 1NF. The data is organized into rows and columns, column values have the same data type, each row has a primary key, and there are no repeating groups (attributes have single values).
+--  My data model fulfills 2NF because the data was collected per county (assigned a fips_code), so the values are dependent on the county/fips_code it was collected from.
+--  My data model does not fulfill 3NF. Some of the column values have transitive dependencies. For example, vegetable acres harvested depends on the number of vegetable farms which depends on the sum/count from each county/fips_code.
