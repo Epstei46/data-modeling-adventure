@@ -1,7 +1,7 @@
 -- Started by downloading the USDA Food Environment Atlas dataset from https://data.world/adamhelsinger/food-environment-atlas & then reviewed the data. As I review, need to start making a list of tables (representing each object/entity, not ideas/concepts) for my database. Then make a column list for each table, including datatype for each column. Try to include all data from the dataset in my data model. Lastly, notate relationships between tables (one-to-one, one-to-many, many-to-many). Then create a draft on DB Designer and create a final version, export PDF when finished.
 
 TABLES:
-supplemental_data_county; supplemental_data_state; access; assistance; health; insecurity; local; prices_taxes; restaurants; stores; socioeconomic.
+counties_states; supplemental_data_county; supplemental_data_state; access; assistance; health; insecurity; local; prices_taxes; restaurants; stores; socioeconomic.
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
@@ -18,6 +18,15 @@ column_code [sub_category] (column_name), data_type (column info)
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
 
+NEW TABLE: counties_states
+fips_code, integer, Primary Key
+state, varchar(2)
+state_name, varchar(30)
+county_name, varchar(50)
+
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+
 TABLE: supplemental_data_county (3143 rows)
 fips_code, integer, Primary Key
 state, varchar(2)
@@ -29,11 +38,21 @@ population_estimate_2010, integer
 population_estimate_2011, integer
 population_estimate_2012, integer
 
+CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
+
+TABLE: supplemental_data_county (3143 rows)
+id, integer, Primary Key
+fips_code, integer, Foreign Key references counties_states
+year, integer
+population_estimate, integer
+
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
 
 TABLE: supplemental_data_state (51 rows)
-state, varchar(30), Primary Key
+id, integer, Primary Key
+state, varchar(2), Foreign Key references counties_states
+state, varchar(30)
 state_population_2008, integer
 state_population_2009, integer
 state_population_2010, integer
@@ -66,6 +85,19 @@ summer_food_participants_fy_2011, integer
 summer_food_participants_fy_2012, integer
 summer_food_participants_fy_2013, integer
 summer_food_participants_fy_2014, integer
+
+CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
+
+TABLE: supplemental_data_state (51 rows)
+state, varchar(2)
+state_name, varchar(30)
+year, integer
+state_population, integer
+wic_participants, integer
+national_school_lunch_program_participants, integer
+school_breakfast_program_participants, integer
+child_and_adult_care_participants, integer
+summer_food_participants, integer
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
