@@ -11,8 +11,8 @@ supplemental_data_county; supplemental_data_state; access; assistance; health; i
 TABLE: name (table info)
 column_name, data_type (column info)
 column_name, data_type (column info)
-column_code (column_name), data_type (column info)
-column_code (column_name), data_type (column info)
+column_code [sub_category] (column_name), data_type (column info)
+column_code [sub_category] (column_name), data_type (column info)
 ...
 
 -----------------------------------------------------------------------------------------------
@@ -153,22 +153,22 @@ TABLE: health (3143 rows)
 fips_code, integer, Primary Key
 state, varchar(2)
 county, varchar(50)
-pct_diabetes_adults09, decimal (5 empty)
-pct_diabetes_adults10, decimal (5 empty)
-pct_obese_adults09, decimal (5 empty)
-pct_obese_adults10, decimal (5 empty)
-pct_obese_adults13, decimal (5 empty)
-pct_obese_child08, decimal (452 empty)
-pct_obese_child11, decimal (429 empty)
-pch_obese_child_08_11, decimal (507 empty)
-pct_hspa09, decimal (640 empty)
-recfac07, decimal (5 empty)
-recfac12, decimal (5 empty)
-pch_recfac_07_12, decimal (129 empty)
-recfacpth07, decimal (5 empty)
-recfacpth12, decimal (5 empty)
-pch_recfacpth_07_12, decimal (129 empty)
-natamen, integer (1-7, 35 empty)
+pct_diabetes_adults09 (Adult diabetes rate, 2009), decimal (5 empty)
+pct_diabetes_adults10 (Adult diabetes rate, 2010), decimal (5 empty)
+pct_obese_adults09 (Adult obesity rate (county), 2009), decimal (5 empty)
+pct_obese_adults10 (Adult obesity rate (county), 2010), decimal (5 empty)
+pct_obese_adults13 (Adult obesity rate, 2013*), decimal (5 empty)
+pct_obese_child08 (Low-income preschool obesity rate, 2006-08), decimal (452 empty)
+pct_obese_child11 (Low-income preschool obesity rate, 2009-11), decimal (429 empty)
+pch_obese_child_08_11 (Low-income preschool obesity rate (% change), 2006-08 to 2009-11), decimal (507 empty)
+pct_hspa09 (High schoolers physically active (%), 2009*), decimal (640 empty)
+recfac07 (Recreation & fitness facilities, 2007), decimal (5 empty)
+recfac12 (Recreation & fitness facilities, 2012), decimal (5 empty)
+pch_recfac_07_12 (Recreation & fitness facilities (% change), 2007-12), decimal (129 empty)
+recfacpth07 (Recreation & fitness facilities/1,000 pop, 2007), decimal (5 empty)
+recfacpth12 (Recreation & fitness facilities/1,000 pop, 2012), decimal (5 empty)
+pch_recfacpth_07_12 (Recreation & fitness facilities/1,000 pop (% change), 2007-12), decimal (129 empty)
+natamen (ERS natural amenity index, 1999), integer (1-7, 35 empty)
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
@@ -177,18 +177,18 @@ TABLE: insecurity (3256 rows, 3144 non-empty, 112 partially empty )
 fips_code, integer, Primary Key
 state, varchar(2)
 county, varchar(50)
-foodinsec_00_02, decimal
-foodinsec_07_09, decimal
-foodinsec_10_12, decimal
-ch_foodinsec_02_12, decimal
-ch_foodinsec_09_12, decimal
-vlfoodsec_00_02, decimal
-vlfoodsec_07_09, decimal
-vlfoodsec_10_12, decimal
-ch_vlfoodsec_02_12, decimal
-ch_vlfoodsec_09_12, decimal
-foodinsec_child_01_07, decimal
-foodinsec_child_03_11 decimal
+foodinsec_00_02 (Household food insecurity (%, three-year average), 2000-02*), decimal
+foodinsec_07_09 (Household food insecurity (%, three-year average), 2007-09*), decimal
+foodinsec_10_12 (Household food insecurity (%, three-year average), 2010-12*), decimal
+ch_foodinsec_02_12 (Household food insecurity (change %),2000-02 to 2010-12*), decimal
+ch_foodinsec_09_12 (Household food insecurity (change %),2007-09 to 2010-12*), decimal
+vlfoodsec_00_02 (Household very low food security (%, three-year average), 2000-02*), decimal
+vlfoodsec_07_09 (Household very low food security (%, three-year average), 2007-09*), decimal
+vlfoodsec_10_12 (Household very low food security (%, three-year average), 2010-12*), decimal
+ch_vlfoodsec_02_12 (Household very low food security (change %),2000-02 to 2010-12*), decimal
+ch_vlfoodsec_09_12 (Household very low food security (change %),2007-09 to 2010-12*), decimal
+foodinsec_child_01_07 (Child food insecurity (% households, multiple-year average), 2001-07*), decimal
+foodinsec_child_03_11 (Child food insecurity (% households, multiple-year average), 2003-11*), decimal
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
@@ -197,52 +197,52 @@ TABLE: local (3255 rows, 113+ partially empty rows)
 fips_code, integer, Primary Key
 state, varchar(2)
 county, varchar(50)
-dirsales_farms07, decimal (177 empty)
-pct_loclfarm07, decimal (234 empty)
-pct_loclsale07, decimal (505 empty)
-dirsales07, integer (403 empty)
-pc_dirsales07, decimal (403 empty)
-fmrkt09, integer (114 empty)
-fmrkt13, integer (113 empty)
-pch_fmrkt_09_13, decimal (596 empty)
-fmrktpth09, decimal (118 empty)
-fmrktpth13, decimal (117 empty)
-pch_fmrktpth_09_13, decimal (600 empty)
-fmrkt_snap13, integer (1074 empty)
-pct_fmrkt_snap13, integer (1074 empty)
-fmrkt_wic13, integer (1074 empty)
-pct_fmrkt_wic13, integer (1074 empty)
-fmrkt_wiccash13, integer (1074 empty)
-pct_fmrkt_wiccash13, decimal (1074 empty)
-fmrkt_sfmnp13, integer (1074 empty)
-pct_fmrkt_sfmnp13, integer (1074 empty)
-fmrkt_frveg13, integer (1074 empty)
-pct_frmkt_frveg13, decimal (1074 empty)
-fmrkt_anmlprod13, integer (1074 empty)
-pct_frmkt_anmlprod13, decimal (1074 empty)
-fmrkt_other13, integer (1074 empty)
-pct_fmrkt_other13, decimal (1074 empty)
-veg_farms07, integer (178 empty)
-veg_acres07, integer (725 empty)
-veg_acrespth07, decimal (726 empty)
-freshveg_farms07, integer (178 empty)
-freshveg_acres07, integer (1415 empty)
-freshveg_acrespth07, decimal (1415 empty)
-orchard_farms07, integer (178 empty)
-orchard_acres07, integer (663 empty)
-orchard_acrespth07, decimal (663 empty)
-berry_farms07, integer (178 empty)
-berry_acres07, integer (953 empty)
-berry_acrespth07, decimal (953 empty)
-slhouse07, integer (113 empty)
-ghveg_farms07, integer (178 empty)
-ghveg_sqft07, integer (958 empty)
-ghveg_sqftpth07, decimal (958 empty)
-foodhub12, bool (113 empty)
-csa07, integer (113 empty)
-agritrsm_ops07, integer (113 empty)
-agritrsm_rct07, integer (1734 empty)
-farm_to_school, bool (113 empty)
+dirsales_farms07 (Farms with direct sales, 2007), decimal (177 empty)
+pct_loclfarm07 (Farms with direct sales (%), 2007), decimal (234 empty)
+pct_loclsale07 (Direct farm sales (%), 2007), decimal (505 empty)
+dirsales07 (Direct farm sales, 2007), integer (403 empty)
+pc_dirsales07 (Direct farm sales per capita, 2007), decimal (403 empty)
+fmrkt09 (Farmers' markets, 2009), integer (114 empty)
+fmrkt13 (Farmers' markets, 2013), integer (113 empty)
+pch_fmrkt_09_13 (Farmers' markets (% change), 2009-13), decimal (596 empty)
+fmrktpth09 (Farmers' markets/1,000 pop, 2009), decimal (118 empty)
+fmrktpth13 (Farmers' markets/1,000 pop, 2013), decimal (117 empty)
+pch_fmrktpth_09_13 (Farmers' markets/1,000 pop (% change), 2009-13), decimal (600 empty)
+fmrkt_snap13 (Farmers' markets that report accepting SNAP, 2013), integer (1074 empty)
+pct_fmrkt_snap13 (Farmers' markets that report accepting SNAP (%), 2013), integer (1074 empty)
+fmrkt_wic13 (Farmers' markets that report accepting WIC, 2013), integer (1074 empty)
+pct_fmrkt_wic13 (Farmers' markets that report accepting WIC (%), 2013), integer (1074 empty)
+fmrkt_wiccash13 (Farmers' markets that report accepting WIC Cash, 2013), integer (1074 empty)
+pct_fmrkt_wiccash13 (Farmers' markets that report accepting WIC Cash (%), 2013), decimal (1074 empty)
+fmrkt_sfmnp13 (Farmers' markets that report accepting SFMNP, 2013), integer (1074 empty)
+pct_fmrkt_sfmnp13 (Farmers' markets that report accepting SFMNP (%), 2013), integer (1074 empty)
+fmrkt_frveg13 (Farmers' markets that report selling fruit & vegetables, 2013), integer (1074 empty)
+pct_frmkt_frveg13 (Farmers' markets that report selling fruit & vegetables (%), 2013), decimal (1074 empty)
+fmrkt_anmlprod13 (Farmers' markets that report selling animal products, 2013), integer (1074 empty)
+pct_frmkt_anmlprod13 (Farmers' markets that report selling animal products (%), 2013), decimal (1074 empty)
+fmrkt_other13 (Farmers' markets that report selling other products, 2013), integer (1074 empty)
+pct_fmrkt_other13 (Farmers' markets that report selling other products (%), 2013), decimal (1074 empty)
+veg_farms07 (Vegetable farms, 2007), integer (178 empty)
+veg_acres07 (Vegetable acres harvested, 2007), integer (725 empty)
+veg_acrespth07 (Vegetable acres harvested/1,000 pop, 2007), decimal (726 empty)
+freshveg_farms07 (Farms with vegetables harvested for fresh market, 2007), integer (178 empty)
+freshveg_acres07 (Vegetable acres harvested for fresh market, 2007), integer (1415 empty)
+freshveg_acrespth07 (Vegetable acres harvested for fresh market/1,000 pop, 2007), decimal (1415 empty)
+orchard_farms07 (Orchard farms, 2007), integer (178 empty)
+orchard_acres07 (Orchard acres, 2007), integer (663 empty)
+orchard_acrespth07 (Orchard acres/1,000 pop, 2007), decimal (663 empty)
+berry_farms07 (Berry farms, 2007), integer (178 empty)
+berry_acres07 (Berry acres, 2007), integer (953 empty)
+berry_acrespth07 (Berry acres/1,000 pop, 2007), decimal (953 empty)
+slhouse07 (Small slaughterhouse facilities, 2007), integer (113 empty)
+ghveg_farms07 (Greenhouse vegetable and fresh herb farms, 2007), integer (178 empty)
+ghveg_sqft07 (Greenhouse veg and fresh herb sq feet, 2007), integer (958 empty)
+ghveg_sqftpth07 (Greenhouse veg and fresh herb sq feet/1,000 pop, 2007), decimal (958 empty)
+foodhub12 (Food hubs, 2012), bool (113 empty)
+csa07 (CSA farms, 2007), integer (113 empty)
+agritrsm_ops07 (Agritourism operations), integer (113 empty)
+agritrsm_rct07 (Agritourism receipts), integer (1734 empty)
+farm_to_school (Farm to school program, 2009), bool (113 empty)
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
@@ -251,13 +251,14 @@ TABLE: prices_taxes (3256 rows, 112+ partially empty rows)
 fips_code, integer, Primary Key
 state, varchar(2)
 county, varchar(50)
-milk_price10, decimal (146 empty)
-soda_price10, decimal (146 empty)
-milk_soda_price10, decimal (146 empty)
-sodatax_stores11, decimal (112 empty)
-sodatax_vendm11, decimal (112 empty)
-chipstax_stores11, decimal (112 empty)chipstax_vendm11, decimal (112 empty)
-food_tax11, decimal (112 empty)
+milk_price10 (Price of low-fat milk/national average, 2010**), decimal (146 empty)
+soda_price10 (Price of sodas/national average, 2010**), decimal (146 empty)
+milk_soda_price10 (Price of low-fat milk/price of sodas, 2010**), decimal (146 empty)
+sodatax_stores11 (Soda sales tax, retail stores, 2011*), decimal (112 empty)
+sodatax_vendm11 (Soda sales tax, vending, 2011*), decimal (112 empty)
+chipstax_stores11 (Chip & pretzel sales tax, retail stores, 2011*), decimal (112 empty)
+chipstax_vendm11 (Chip & pretzel sales tax, vending, 2011*), decimal (112 empty)
+food_tax11 (General food sales tax, retail stores, 2011*), decimal (112 empty)
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
@@ -290,21 +291,21 @@ TABLE: socioeconomic (3143 rows)
 fips_code, integer, Primary Key
 state, varchar(2)
 county, varchar(50)
-pct_nhwhite10, decimal
-pct_nhblack10, decimal
-pct_hisp10, decimal
-pct_nhasian10, decimal
-pct_nhna10, decimal
-pct_nhpi10, decimal
-pct_65older10, decimal
-pct_18younger10, decimal
-medhhinc10, varchar(10) (all integers though)
-povrate10, varchar(10) (all decimals though)
-perpov10, bool
-childpovrate10, varchar(10) (all decimals though)
-perchldpov10, bool
-metro13, bool
-poploss00, varchar(10) (but all 0 or 1, except for 6 <Null> values)
+pct_nhwhite10 (% White, 2010), decimal
+pct_nhblack10 (% Black, 2010), decimal
+pct_hisp10 (% Hispanic, 2010), decimal
+pct_nhasian10 (% Asian, 2010), decimal
+pct_nhna10 (% American Indian or Alaska Native, 2010), decimal
+pct_nhpi10 (% Hawaiian or Pacific Islander, 2010), decimal
+pct_65older10 (% Population 65 years or older, 2010), decimal
+pct_18younger10 (% Population under age 18, 2010), decimal
+medhhinc10 (Median household income, 2010), varchar(10) (all integers though)
+povrate10 (Poverty rate, 2010), varchar(10) (all decimals though)
+perpov10 (Persistent-poverty counties, 2010), bool
+childpovrate10 (Child poverty rate, 2010), varchar(10) (all decimals though)
+perchldpov10 (Persistent-child-poverty counties, 2010), bool
+metro13 (Metro/nonmetro counties, 2010), bool
+poploss00 (Population-loss counties, 2000), varchar(10) (but all 0 or 1, except for 6 <Null> values)
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
