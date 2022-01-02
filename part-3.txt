@@ -1,0 +1,9 @@
+(1) Imagine you work for the USDA and you are trying to decide how to allocate federal funding to different states/counties in the United States. What are some KPIs that may be important in order to make this decision?
+--  
+
+(2) Provide an example of what granularity would look like in the USDA database.
+--  
+
+
+(3) Evaluate your data model in terms of normalization. Does your data model fulfill the first normal form? What about the second normal form? What about the third normal form?
+--  
