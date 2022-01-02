@@ -3,7 +3,20 @@
 TABLES:
 supplemental_data_county; supplemental_data_state; access; assistance; health; insecurity; local; prices_taxes; restaurants; stores; socioeconomic.
 
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
 
+TABLE: name (table info)
+column_name, data_type (column info)
+column_name, data_type (column info)
+column_code (column_name), data_type (column info)
+column_code (column_name), data_type (column info)
+...
+
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
 
 TABLE: supplemental_data_county (3143 rows)
 fips_code, integer, Primary Key
@@ -15,6 +28,9 @@ population_estimate_2009, integer
 population_estimate_2010, integer
 population_estimate_2011, integer
 population_estimate_2012, integer
+
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
 
 TABLE: supplemental_data_state (51 rows)
 state, varchar(30), Primary Key
@@ -51,78 +67,87 @@ summer_food_participants_fy_2012, integer
 summer_food_participants_fy_2013, integer
 summer_food_participants_fy_2014, integer
 
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+
 TABLE: access (3256 rows, 3144 non-empty, 112 partially empty)
 fips_code, integer, Primary Key
 state, varchar(2)
 county, varchar(50)
-laccess_pop10, decimal
-pct_laccess_pop10, decimal
-laccess_lowi10, decimal
-pct_laccess_lowi10, decimal
-laccess_child10, decimal
-pct_laccess_child10, decimal
-laccess_seniors10, decimal
-pct_laccess_seniors10, decimal
-laccess_hhnv10, decimal
-pct_laccess_hhnv10, decimal
+laccess_pop10 (Population, low access to store, 2010), decimal
+pct_laccess_pop10 (Population, low access to store (%), 2010), decimal
+laccess_lowi10 (Low income & low access to store, 2010), decimal
+pct_laccess_lowi10 (Low income & low access to store (%), 2010), decimal
+laccess_child10 (Children, low access to store, 2010), decimal
+pct_laccess_child10 (Children, low access to store (%), 2010), decimal
+laccess_seniors10 (Seniors, low access to store, 2010), decimal
+pct_laccess_seniors10 (Seniors, low access to store (%), 2010), decimal
+laccess_hhnv10 (Households, no car & low access to store, 2010), decimal
+pct_laccess_hhnv10 (Households, no car & low access to store (%), 2010), decimal
+
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
 
 TABLE: assistance (3143 rows, some empty values & some columns with 100% same value)
 fips_code, integer, Primary Key
 state, varchar(2)
 county, varchar(50)
-redemp_snaps08, decimal (328 empty)
-redemp_snaps12, decimal (242 empty)
-pch_redemp_snaps_08_12, decimal (342 empty)
-pct_snap09, decimal (51 distinct, per state?)
-pct_snap14, decimal (51 distinct, per state?)
-pch_snap_09_14, decimal (51 distinct, per state?)
-pc_snapben08, decimal (11 empty)
-pc_snapben10, decimal (390 empty)
-pch_pc_snapben_08_10, decimal (391 empty)
-snap_part_rate08, integer
-snap_part_rate10, integer
-snap_oapp00, bool (100% false)
-snap_oapp05, decimal (0/0.5/1)
-snap_oapp10, decimal (0/0.5/1)
-snap_facewaiver00, bool (100% false)
-snap_facewaiver05, decimal (0/0.5/1)
-snap_facewaiver10, decimal (0/0.5/1)
-snap_vehexcl00, bool
-snap_vehexcl05, bool
-snap_vehexcl10, bool
-snap_bbce00, bool
-snap_bbce05, bool
-snap_bbce10, bool
-snap_reportsimple00, bool (100% false)
-snap_reportsimple05, bool
-snap_reportsimple10, bool
-pct_nslp09, decimal (51 distinct, per state?)
-pct_nslp14, decimal (51 distinct, per state?)
-pch_nslp_09_14, decimal (51 distinct, per state?)
-pct_free_lunch06, decimal (12 empty)
-pct_free_lunch10, decimal (18 empty)
-pct_reduced_lunch06, decimal (14 empty)
-pct_reduced_lunch10, decimal (18 empty)
-pct_sbp09, decimal (51 distinct, per state?)
-pct_sbp14, decimal (51 distinct, per state?)
-pch_sbp_09_14, decimal (51 distinct, per state?)
-pct_sfsp09, decimal (51 distinct, per state?)
-pct_sfsp14, decimal (51 distinct, per state?)
-pch_sfsp_09_14, decimal (51 distinct, per state?)
-pc_wic_redemp08, decimal (1064 empty)
-pc_wic_redemp12, decimal (1139 empty)
-pch_pc_wic_redemp_08_12, decimal (1201 empty)
-redemp_wics08, decimal (1064 empty)
-redemp_wics12, decimal (1139 empty)
-pch_redemp_wics_08_12, decimal (1201 empty)
-pct_wic09, decimal (51 distinct, per state?)
-pct_wic14, decimal (51 distinct, per state?)
+redemp_snaps08 (SNAP redemptions/SNAP-authorized stores, 2008), decimal (328 empty)
+redemp_snaps12 (SNAP redemptions/SNAP-authorized stores, 2012), decimal (242 empty)
+pch_redemp_snaps_08_12 (SNAP redemptions/SNAP-authorized stores (% change), 2008-12), decimal (342 empty)
+pct_snap09 (SNAP participants (% pop), 2009*), decimal (51 distinct, per state?)
+pct_snap14 (SNAP participants (% pop), 2014*), decimal (51 distinct, per state?)
+pch_snap_09_14 (SNAP participants (change % pop), 2009-14*), decimal (51 distinct, per state?)
+pc_snapben08 (SNAP benefits per capita, 2008), decimal (11 empty)
+pc_snapben10 (SNAP benefits per capita, 2010), decimal (390 empty)
+pch_pc_snapben_08_10 (SNAP benefits per capita (% change), 2008-10), decimal (391 empty)
+snap_part_rate08 (SNAP participants (% eligible pop), 2008*), integer
+snap_part_rate10 (SNAP participants (% eligible pop), 2010*), integer
+snap_oapp00 (SNAP online application, 2000*), bool (100% false)
+snap_oapp05 (SNAP online application, 2005*), decimal (0/0.5/1)
+snap_oapp10 (SNAP online application, 2010*), decimal (0/0.5/1)
+snap_facewaiver00 (SNAP face interview waiver, 2000*), bool (100% false)
+snap_facewaiver05 (SNAP face interview waiver, 2005*), decimal (0/0.5/1)
+snap_facewaiver10 (SNAP face interview waiver, 2010*), decimal (0/0.5/1)
+snap_vehexcl00 (SNAP vehicle exclusion, 2000*), bool
+snap_vehexcl05 (SNAP vehicle exclusion, 2005*), bool
+snap_vehexcl10 (SNAP vehicle exclusion, 2010*), bool
+snap_bbce00 (SNAP Broad-based Categorical Eligibility, 2000*), bool
+snap_bbce05 (SNAP Broad-based Categorical Eligibility, 2005*), bool
+snap_bbce10 (SNAP Broad-based Categorical Eligibility, 2010*), bool
+snap_reportsimple00 (SNAP simplified reporting, 2000*), bool (100% false)
+snap_reportsimple05 (SNAP simplified reporting, 2005*), bool
+snap_reportsimple10 (SNAP simplified reporting, 2010*), bool
+pct_nslp09 (National School Lunch Program participants (% pop), 2009*), decimal (51 distinct, per state?)
+pct_nslp14 (National School Lunch Program participants (% pop), 2014*), decimal (51 distinct, per state?)
+pch_nslp_09_14 (National School Lunch Program participants (change % pop), 2009-14*), decimal (51 distinct, per state?)
+pct_free_lunch06 (Students eligible for free lunch (%), 2006), decimal (12 empty)
+pct_free_lunch10 (Students eligible for free lunch (%), 2010), decimal (18 empty)
+pct_reduced_lunch06 (Students eligible for reduced-price lunch (%), 2006), decimal (14 empty)
+pct_reduced_lunch10 (Students eligible for reduced-price lunch (%), 2010), decimal (18 empty)
+pct_sbp09 (School Breakfast Program participants (% pop), 2009*), decimal (51 distinct, per state?)
+pct_sbp14 (School Breakfast Program participants (% pop), 2014*), decimal (51 distinct, per state?)
+pch_sbp_09_14 (School Breakfast Program participants (change % pop), 2009-14*), decimal (51 distinct, per state?)
+pct_sfsp09 (Summer Food Service Program participants (% pop), 2009*), decimal (51 distinct, per state?)
+pct_sfsp14 (Summer Food Service Program participants (% pop), 2014*), decimal (51 distinct, per state?)
+pch_sfsp_09_14 (Summer Food Program participants (change % pop), 2009-14*), decimal (51 distinct, per state?)
+pc_wic_redemp08 (WIC redemptions per capita, 2008), decimal (1064 empty)
+pc_wic_redemp12 (WIC redemptions per capita, 2012), decimal (1139 empty)
+pch_pc_wic_redemp_08_12 (WIC redemptions per capita (% change), 2008-12), decimal (1201 empty)
+redemp_wics08 (WIC redemptions/WIC-authorized stores, 2008), decimal (1064 empty)
+redemp_wics12 (WIC redemptions/WIC-authorized stores, 2012), decimal (1139 empty)
+pch_redemp_wics_08_12 (WIC redemptions/WIC-authorized stores (% change), 2008-12), decimal (1201 empty)
+pct_wic09 (WIC participants (% pop), 2009*), decimal (51 distinct, per state?)
+pct_wic14 (WIC participants (% pop), 2014*), decimal (51 distinct, per state?)
 ---- below columns cut off so no panel showing: distinct, non-empty, empty, mean, min, max, etc. Would need to query for that info.
-pch_wic_09_14, decimal
-pct_cacfp09, decimal
-pct_cacfp14, decimal
-pch_cacfp_09_14, decimal
-fdpir12, integer
+pch_wic_09_14 (WIC participants (change % pop), 2009-14*), decimal
+pct_cacfp09 (Child & Adult Care (% pop), 2009*), decimal
+pct_cacfp14 (Child & Adult Care (% pop), 2009*), decimal
+pch_cacfp_09_14 (Child & Adult Care (change % pop), 2009-14*), decimal
+fdpir12 (FDPIR Sites, 2012), integer
+
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
 
 TABLE: health (3143 rows)
 fips_code, integer, Primary Key
@@ -145,6 +170,9 @@ recfacpth12, decimal (5 empty)
 pch_recfacpth_07_12, decimal (129 empty)
 natamen, integer (1-7, 35 empty)
 
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+
 TABLE: insecurity (3256 rows, 3144 non-empty, 112 partially empty )
 fips_code, integer, Primary Key
 state, varchar(2)
@@ -162,7 +190,10 @@ ch_vlfoodsec_09_12, decimal
 foodinsec_child_01_07, decimal
 foodinsec_child_03_11 decimal
 
-TABLE: local (3255 rows)
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+
+TABLE: local (3255 rows, 113+ partially empty rows)
 fips_code, integer, Primary Key
 state, varchar(2)
 county, varchar(50)
@@ -181,56 +212,143 @@ fmrkt_snap13, integer (1074 empty)
 pct_fmrkt_snap13, integer (1074 empty)
 fmrkt_wic13, integer (1074 empty)
 pct_fmrkt_wic13, integer (1074 empty)
-fmrkt_wiccash13,pct_fmrkt_wiccash13,
-fmrkt_sfmnp13,
-pct_fmrkt_sfmnp13,
-fmrkt_frveg13,
-pct_frmkt_frveg13,
-fmrkt_anmlprod13,
-pct_frmkt_anmlprod13,
-fmrkt_other13,
-pct_fmrkt_other13,
-veg_farms07,
-veg_acres07,
-veg_acrespth07,
-freshveg_farms07,
-freshveg_acres07,
-freshveg_acrespth07,
-orchard_farms07,
-orchard_acres07,
-orchard_acrespth07,
-berry_farms07,
-berry_acres07,
-berry_acrespth07,
-slhouse07,
-ghveg_farms07,
-ghveg_sqft07,
-ghveg_sqftpth07,
-foodhub12,
-csa07,
-agritrsm_ops07,
-agritrsm_rct07,
-farm_to_school,
+fmrkt_wiccash13, integer (1074 empty)
+pct_fmrkt_wiccash13, decimal (1074 empty)
+fmrkt_sfmnp13, integer (1074 empty)
+pct_fmrkt_sfmnp13, integer (1074 empty)
+fmrkt_frveg13, integer (1074 empty)
+pct_frmkt_frveg13, decimal (1074 empty)
+fmrkt_anmlprod13, integer (1074 empty)
+pct_frmkt_anmlprod13, decimal (1074 empty)
+fmrkt_other13, integer (1074 empty)
+pct_fmrkt_other13, decimal (1074 empty)
+veg_farms07, integer (178 empty)
+veg_acres07, integer (725 empty)
+veg_acrespth07, decimal (726 empty)
+freshveg_farms07, integer (178 empty)
+freshveg_acres07, integer (1415 empty)
+freshveg_acrespth07, decimal (1415 empty)
+orchard_farms07, integer (178 empty)
+orchard_acres07, integer (663 empty)
+orchard_acrespth07, decimal (663 empty)
+berry_farms07, integer (178 empty)
+berry_acres07, integer (953 empty)
+berry_acrespth07, decimal (953 empty)
+slhouse07, integer (113 empty)
+ghveg_farms07, integer (178 empty)
+ghveg_sqft07, integer (958 empty)
+ghveg_sqftpth07, decimal (958 empty)
+foodhub12, bool (113 empty)
+csa07, integer (113 empty)
+agritrsm_ops07, integer (113 empty)
+agritrsm_rct07, integer (1734 empty)
+farm_to_school, bool (113 empty)
 
-TABLE: prices_taxes
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+
+TABLE: prices_taxes (3256 rows, 112+ partially empty rows)
 fips_code, integer, Primary Key
 state, varchar(2)
 county, varchar(50)
+milk_price10, decimal (146 empty)
+soda_price10, decimal (146 empty)
+milk_soda_price10, decimal (146 empty)
+sodatax_stores11, decimal (112 empty)
+sodatax_vendm11, decimal (112 empty)
+chipstax_stores11, decimal (112 empty)chipstax_vendm11, decimal (112 empty)
+food_tax11, decimal (112 empty)
 
-TABLE: restaurants
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+
+TABLE: restaurants (3143 rows)
 fips_code, integer, Primary Key
 state, varchar(2)
 county, varchar(50)
+ffr07 (Fast-food restaurants, 2007), integer (5 empty)
+ffr12 (Fast-food restaurants, 2012), integer
+pch_ffr_07_12 (Fast-food restaurants (% change), 2007-12), decimal (45 empty)
+ffrpth07 (Fast-food restaurants/1,000 pop, 2007), decimal (5 empty)
+ffrpth12 (Fast-food restaurants/1,000 pop, 2012), decimal
+pch_ffrpth_07_12 (Fast-food restaurants/1,000 pop (% change), 2007-12), decimal
+fsr07 (Full-service restaurants, 2007), integer (5 empty)
+fsr12 (Full-service restaurants, 2012), integer
+pch_fsr_07_12 (Full-service restaurants (% change), 2007-12), decimal (28 empty)
+fsrpth07 (Full-service restaurants/1,000 pop, 2007), decimal (5 empty)
+fsrpth12 (Full-service restaurants/1,000 pop, 2012), decimal
+pch_fsrpth_07_12 (Full-service restaurants/1,000 pop (% change), 2007-12), decimal
+pc_ffrsales02 (Expenditures per capita, fast food, 2002*), integer (16 empty)
+pc_ffrsales07 (Expenditures per capita, fast food, 2007*), decimal
+pc_fsrsales02 (Expenditures per capita, restaurants, 2002*), integer (16 empty)
+pc_fsrsales07 (Expenditures per capita, restaurants, 2007*), decimal
 
-TABLE: stores
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+
+TABLE: socioeconomic (3143 rows)
 fips_code, integer, Primary Key
 state, varchar(2)
 county, varchar(50)
+pct_nhwhite10, decimal
+pct_nhblack10, decimal
+pct_hisp10, decimal
+pct_nhasian10, decimal
+pct_nhna10, decimal
+pct_nhpi10, decimal
+pct_65older10, decimal
+pct_18younger10, decimal
+medhhinc10, varchar(10) (all integers though)
+povrate10, varchar(10) (all decimals though)
+perpov10, bool
+childpovrate10, varchar(10) (all decimals though)
+perchldpov10, bool
+metro13, bool
+poploss00, varchar(10) (but all 0 or 1, except for 6 <Null> values)
 
-TABLE: socioeconomic
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+
+TABLE: stores (3221 rows, 78+ partially empty)
 fips_code, integer, Primary Key
 state, varchar(2)
-county, varchar(50)
+county, varchar(50) (78 empty)
+groc07 (Grocery stores, 2007), integer (78 empty)
+groc12 (Grocery stores, 2012), integer (78 empty)
+pch_groc_07_12 (Grocery stores (% change), 2007-12), decimal (105 empty)
+grocpth07 (Grocery stores/1,000 pop, 2007), decimal (78 empty)
+grocpth12 (Grocery stores/1,000 pop, 2012), decimal (78 empty)
+pch_grocpth_07_12 (Grocery stores/1,000 pop (% change), 2007-12), decimal (100 empty)
+superc07 (Supercenters & club stores, 2007), integer (78 empty)
+superc12 (Supercenters & club stores, 2012), integer (78 empty)
+pch_superc_07_12 (Supercenters & club stores (% change), 2007-12), decimal (583 empty)
+supercpth07 (Supercenters & club stores/1,000 pop, 2007), decimal (78 empty)
+supercpth12 (Supercenters & club stores/1,000 pop, 2012), decimal (78 empty)
+pch_supercpth_07_12 (Supercenters & club stores/1,000 pop (% change), 2007-12), decimal (583 empty)
+convs07 (Convenience stores, 2007), integer (78 empty)
+convs12 (Convenience stores, 2012), integer (78 empty)
+pch_convs_07_12 (Convenience stores (% change), 2007-12), decimal (103 empty)
+convspth07 (Convenience stores/1,000 pop, 2007), decimal (78 empty)
+convspth12 (Convenience stores/1,000 pop, 2012), decimal (78 empty)
+pch_convspth_07_12 (Convenience stores/1,000 pop (% change), 2007-12), decimal (99 empty)
+specs07 (Specialized food stores, 2007), integer (78 empty)
+specs12 (Specialized food stores, 2012), integer (78 empty)
+pch_specs_07_12 (Specialized food stores (% change), 2007-12), decimal (251 empty)
+specspth07 (Specialized food stores/1,000 pop, 2007), decimal (78 empty)
+specspth12 (Specialized food stores/1,000 pop, 2012), decimal (78 empty)
+pch_specspth_07_12 (Specialized food stores/1,000 pop (% change), 2007-12), decimal (247 empty)
+snaps08 (SNAP-authorized stores, 2008), decimal (78 empty)
+snaps12 (SNAP-authorized stores, 2012), decimal (78 empty)
+pch_snaps_08_12 (SNAP-authorized stores (% change), 2008-12), decimal (83 empty)
+snapspth08 (SNAP-authorized stores/1,000 pop, 2008), decimal (78 empty)
+snapspth12 (SNAP-authorized stores/1,000 pop, 2012), decimal (78 empty)
+pch_snapspth_08_12 (SNAP-authorized stores/1,000 pop (% change), 2008-12), decimal (83 empty)
+wics08 (WIC-authorized stores, 2008), integer (78 empty)
+wics12 (WIC-authorized stores, 2012), integer (78 empty)
+pch_wics_08_12 (WIC-authorized stores (% change), 2008-12), decimal (97 empty)
+wicspth08 (WIC-authorized stores/1,000 pop, 2008), decimal (78 empty)
+wicspth12 (WIC-authorized stores/1,000 pop, 2012), decimal (78 empty)
+pch_wicspth_08_12 (WIC-authorized stores/1,000 pop (% change), 2008-12), decimal (97 empty)
 
-
----- below columns cut off so no panel showing: distinct, non-empty, empty, mean, min, max, etc. Would need to query for that info.
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
