@@ -1,5 +1,7 @@
 (1) Imagine you work for the USDA and you are trying to decide how to allocate federal funding to different states/counties in the United States. What are some KPIs that may be important in order to make this decision?
---  
+--  From 'access' table: laccess_pop10 (Population, low access to store, 2010), decimal
+--  From 'access' table: pct_laccess_pop10 (Population, low access to store (%), 2010), decimal
+--  Most of the 'assistance' table.
 
 (2) Provide an example of what granularity would look like in the USDA database.
 --  
